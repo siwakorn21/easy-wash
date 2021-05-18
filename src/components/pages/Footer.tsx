@@ -3,12 +3,9 @@ import styled from 'styled-components';
 import LogoImage from '../../assets/images/logo-2.png';
 
 const FooterContainer = styled.div`
-    /* height: 9vh; */
-    /* height: 100px; */
     background-color: #480CA8;
     display: flex;
     align-items: center;
-    /* margin-top: 10rem; */
 `;
 
 const Logo = styled.img`
