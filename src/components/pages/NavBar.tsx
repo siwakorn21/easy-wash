@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import LogoImage from '../../assets/images/logo-1.png';
 
 const NavBarContainer = styled.div`
     background-color: white;
@@ -11,10 +12,16 @@ const NavBarContainer = styled.div`
     box-shadow:0px 4px 3px #C4C4C4;
 `;
 
-const Logo = styled.div`
+const LogoContainer = styled.div`
     margin-right: auto;
     margin-left: 6rem;
-`
+    width: 20%;
+`;
+
+const Logo = styled.img`
+    width: 50%;
+`;
+
 
 const NavBarMenu = styled.div`
     margin-right: 6rem;
@@ -32,9 +39,9 @@ const NavBarMenuItem = styled.a`
 const NavBar = () => {
     return (
         <NavBarContainer>
-            <Logo>
-                Logo
-            </Logo>
+            <LogoContainer>
+                <Logo src={LogoImage} />
+            </LogoContainer>
             <NavBarMenu>
                 <NavBarMenuItem href='#'>Home</NavBarMenuItem>
                 <NavBarMenuItem href='#'>Register</NavBarMenuItem>
