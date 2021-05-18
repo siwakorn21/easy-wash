@@ -2,13 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { getTsBuildInfoEmitOutputFilePath } from 'typescript';
 import MOBILE_IMAGE from '../assets/images/e25c12b7f84cd6ecbc3c6a543ba01e78.png';
+import ProblemImage from '../assets/images/problem.png';
 import Footer from '../components/pages/Footer';
 import RegisterForm from '../components/pages/RegisterForm';
 
 const HomeContainer = styled.div`
+    /* font-family: 'Prompt', sans-serif; */
 `;
 
 const Content1 = styled.div`
+    height: 100vh;
     width: 70%;
     margin-left: auto;
     margin-right: auto;
@@ -17,7 +20,6 @@ const Content1 = styled.div`
 const Header1 = styled.h1`
     margin-top: 5rem;
     font-size: 2.5rem;
-    font-family: 'Roboto';
     text-align: center;
 `;
 
@@ -31,6 +33,7 @@ const Video = styled.div`
 `;
 
 const Content2 = styled.div`
+    height: 100vh;
     width: 100%;
     margin-right: auto;
     margin-left: auto;
@@ -68,7 +71,7 @@ const TextBox2 = styled.div`
 const Content3 = styled.div`
     background-color: #E5E5E5;
     width: 100%;
-    /* height: 80vh; */
+    /* height: 100vh; */
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 10rem;
@@ -80,6 +83,12 @@ const Content3 = styled.div`
     }
 `;
 
+const TmpImageContainer = styled.div`
+    margin-top: 7rem;
+`;
+
+const TmpImage = styled.img``;
+
 const Home = () => {
 
     return (
@@ -88,7 +97,10 @@ const Home = () => {
                 <Header1>
                     ทำไมเรายังต้องทน<br/>กับปัญหาต่างๆ เหล่านี้?
                 </Header1>
-                <Video />
+                <TmpImageContainer>
+                    <TmpImage src={ProblemImage} />
+                </TmpImageContainer>
+                {/* <Video /> */}
             </Content1>
             <Content2>
                 <MobileImg src={MOBILE_IMAGE}></MobileImg>
