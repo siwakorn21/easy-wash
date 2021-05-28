@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { getTsBuildInfoEmitOutputFilePath } from 'typescript';
 import MOBILE_IMAGE from '../assets/images/e25c12b7f84cd6ecbc3c6a543ba01e78.png';
 import ProblemImage from '../assets/images/problem.png';
 import Footer from '../components/pages/Footer';
 import RegisterForm from '../components/pages/RegisterForm';
+import StoreForm from '../components/pages/StoreForm';
+import UserForm from '../components/pages/UserForm';
 
 const HomeContainer = styled.div`
     /* font-family: 'Prompt', sans-serif; */
@@ -66,6 +68,11 @@ const TextBox2 = styled.div`
         margin-top: 3rem;
         font-size: 1.25rem;
     }
+
+    h4 {
+        text-align: center;
+        font-size: 2rem;
+    }
 `;
 
 const Content3 = styled.div`
@@ -81,6 +88,13 @@ const Content3 = styled.div`
         font-size: 2.2rem;
         text-align: center;
     }
+
+    h4 {
+        text-align: center;
+        font-weight: 400;
+        font-size: 1.5rem;
+        margin-top: 2rem;
+    }
 `;
 
 const TmpImageContainer = styled.div`
@@ -89,7 +103,43 @@ const TmpImageContainer = styled.div`
 
 const TmpImage = styled.img``;
 
+
+const Button = styled.button`
+    cursor: pointer;
+    background-color: #480CA8;
+    font-family: 'Prompt', sans-serif;
+    font-weight: bolder;
+    color: white;
+    font-size: 1.2rem;
+    width: 15rem;
+    height: 4rem;
+    border-radius: 5px;
+    
+    &:last-child {
+        margin-left: 4rem;
+    }
+`;
+
+const ButtonContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+`;
+
 const Home = () => {
+
+    const [userRole, setUserRole] = useState(0); 
+
+    const SelectRoleHandler = (role: number) => {
+        setUserRole(role);
+    }
+
+    const renderForm = () => {
+        if (userRole == 0) return null;
+        else if (userRole == 1) return <UserForm />
+        else return <StoreForm />
+    }
 
     return (
         <HomeContainer>
@@ -111,11 +161,18 @@ const Home = () => {
                        <br/>ของการซักผ้าในรูปแบบเดิมๆ เพราะไม่ว่าคุณจะอยู่ที่ไหนก็ 
                        <br/>สามารถซักผ้าได้ เพียงแค่ใช้ Easy Wash</p>
                 </TextBox2>
+               
             </Content2>
             <Content3>
-                <h3>ลงทะเบียนเพื่อร่วมพัฒนาแอปพลิเคชัน
-                    <br/>และลุ้นรับสิทธิประโยชน์ก่อนใคร</h3>
-                    <RegisterForm />
+                <h3>กรอกข้อมูลเพื่อร่วมพัฒนาแอปพลิเคชัน
+                <br />และลุ้นรับสิทธิประโยชน์มากมาย</h3>
+                <h4>คุณคือ ผู้ใช้บริการ หรือ ผู้ให้บริการซัก-อบ-รีด</h4>
+                <br/>
+                <ButtonContainer>
+                    <Button onClick={() => SelectRoleHandler(1)}>ผู้ใช้บริการ</Button>
+                    <Button onClick={() => SelectRoleHandler(2)}>ผู้ให้บริการ</Button>
+                </ButtonContainer>
+                {renderForm()}
             </Content3>
             <Footer />
         </HomeContainer>

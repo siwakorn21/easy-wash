@@ -34,7 +34,7 @@ const NavBarMenuItem = styled.a`
     &:last-child {
         margin-right: 0;
     }
-`
+`;
 
 const NavBar = () => {
     return (
