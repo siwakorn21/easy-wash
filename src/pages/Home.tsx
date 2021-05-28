@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactPlayer from 'react-player';
 import styled from 'styled-components';
 import { getTsBuildInfoEmitOutputFilePath } from 'typescript';
 import MOBILE_IMAGE from '../assets/images/e25c12b7f84cd6ecbc3c6a543ba01e78.png';
@@ -127,6 +128,14 @@ const ButtonContainer = styled.div`
     justify-content: center;
 `;
 
+const VideoContainer = styled.div`
+    width: 52%;
+    height: 41vh;
+    margin-top: 7rem;
+    margin-left: auto;
+    margin-right: auto;
+`;
+
 const Home = () => {
 
     const [userRole, setUserRole] = useState(0); 
@@ -147,9 +156,16 @@ const Home = () => {
                 <Header1>
                     ทำไมเรายังต้องทน<br/>กับปัญหาต่างๆ เหล่านี้?
                 </Header1>
-                <TmpImageContainer>
+                <VideoContainer>
+                    <ReactPlayer 
+                        url="https://www.youtube.com/watch?v=1MRA8sHmJWA"
+                        width= '100%'
+                        height= '100%'
+                    />
+                </VideoContainer>
+                {/* <TmpImageContainer>
                     <TmpImage src={ProblemImage} />
-                </TmpImageContainer>
+                </TmpImageContainer> */}
                 {/* <Video /> */}
             </Content1>
             <Content2>
