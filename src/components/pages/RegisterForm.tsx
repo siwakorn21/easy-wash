@@ -94,6 +94,14 @@ const Button = styled.button`
     margin-left: auto;
 `;
 
+const AgeContainer = styled.div`
+
+`;
+
+const OccupationContainer = styled.div`
+
+`;
+
 const RegisterForm = () => {
 
     return (
@@ -102,9 +110,18 @@ const RegisterForm = () => {
                 <EmailContainer>
                     <QuestionHeader>Email:</QuestionHeader>
                     <br/>
-                    <input type='email' />
+                    <input type='email' value='email' />
                     <br/>
                 </EmailContainer>
+                <AgeContainer>
+                    <p>อายุ: </p>
+                    <br />
+                    <input type='age' value='age' />
+                </AgeContainer>
+                <OccupationContainer>
+                    <p>อาชีพ: </p>
+                    <input type='occupation' value='occupation' />
+                </OccupationContainer>
                 <QuestionContainer>
                     <QuestionHeader>ปัจจุบันคุณมีวิธีจัดการเสื้อผ้าของคุณอย่างไร</QuestionHeader>
                     <br/>
