@@ -4,16 +4,18 @@ import '../../index.css';
 
 const Form = styled.form`
     width: 75%;
-    background-color: white;
+    background-color: #F5F5F5;
     margin-left: auto;
     margin-right: auto;
     border-radius: 1rem;
     padding-top: 4rem;
     margin-top: 5rem;
     padding-bottom: 5rem;
+    z-index: 100;
 `;
 
 const FormContainer = styled.div`
+    z-index: 2;
     width: 74%;
     margin-left:auto;
     margin-right: auto;

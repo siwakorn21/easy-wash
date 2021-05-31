@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { getTsBuildInfoEmitOutputFilePath } from 'typescript';
-import MOBILE_IMAGE from '../assets/images/e25c12b7f84cd6ecbc3c6a543ba01e78.png';
+import MOBILE_IMAGE from '../assets/images/sakdee-mobile.png';
 import ProblemImage from '../assets/images/problem.png';
 import Footer from '../components/pages/Footer';
 import RegisterForm from '../components/pages/RegisterForm';
@@ -18,6 +19,12 @@ const Content1 = styled.div`
     width: 70%;
     margin-left: auto;
     margin-right: auto;
+
+    h4 {
+        margin-top: 4rem;
+        font-size: 1.5rem;
+        text-align: center;
+    }
 `;
 
 const Header1 = styled.h1`
@@ -26,60 +33,19 @@ const Header1 = styled.h1`
     text-align: center;
 `;
 
-const Video = styled.div`
-    width: 85%;
-    height: 600px;
-    background-color: #C4C4C4;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5rem;
-`;
-
-const Content2 = styled.div`
-    height: 100vh;
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding-top: 4rem;
-`;
-
 const MobileImg = styled.img`
-    position: relative;
-    width: 120%;
-    left: 5%;
-`;
-
-const TextBox2 = styled.div`
-    margin-top: 10rem;
-    width: 100%;
-
-    h2 {
-        font-size: 2.9rem;
-    }
-
-    h3 {
-        margin-top: 2rem;
-        font-size: 2rem;
-        font-weight: lighter;
-    }
-
-    p {
-        margin-top: 3rem;
-        font-size: 1.25rem;
-    }
-
-    h4 {
-        text-align: center;
-        font-size: 2rem;
-    }
+    position: absolute;
+    top: -0%;
+    width: 60%;
+    z-index: -1;
 `;
 
 const Content3 = styled.div`
-    background-color: #E5E5E5;
+    margin-top: 10rem;
+    z-index: -2;
+    background-color: white;
     width: 100%;
-    /* height: 100vh; */
+    position: relative;
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 10rem;
@@ -87,7 +53,9 @@ const Content3 = styled.div`
 
     h3 {
         font-size: 2.2rem;
-        text-align: center;
+        margin-left: 45%;
+        margin-top: 3rem;
+        /* text-align: center; */
     }
 
     h4 {
@@ -96,14 +64,8 @@ const Content3 = styled.div`
         font-size: 1.5rem;
         margin-top: 2rem;
     }
+
 `;
-
-const TmpImageContainer = styled.div`
-    margin-top: 7rem;
-`;
-
-const TmpImage = styled.img``;
-
 
 const Button = styled.button`
     cursor: pointer;
@@ -112,8 +74,8 @@ const Button = styled.button`
     font-weight: bolder;
     color: white;
     font-size: 1.2rem;
-    width: 15rem;
-    height: 4rem;
+    width: 13rem;
+    height: 3rem;
     border-radius: 5px;
     
     &:last-child {
@@ -146,8 +108,26 @@ const Home = () => {
 
     const renderForm = () => {
         if (userRole == 0) return null;
-        else if (userRole == 1) return <UserForm />
-        else return <StoreForm />
+        else if (userRole == 1) {
+            return (
+                <Content3>
+                    <h3>กรอกข้อมูลเพื่อร่วมพัฒนาแอปพลิเคชัน
+                    <br />และลุ้นรับสิทธิประโยชน์มากมาย</h3>
+                    <MobileImg src={MOBILE_IMAGE} /> 
+                    <UserForm />
+                </Content3>
+            );
+        }
+        else {
+            return (
+                <Content3>
+                    <h3>กรอกข้อมูลเพื่อร่วมพัฒนาแอปพลิเคชัน
+                    <br />และลุ้นรับสิทธิประโยชน์มากมาย</h3>
+                    <MobileImg src={MOBILE_IMAGE} /> 
+                    <StoreForm />
+                </Content3>
+            );
+        }
     }
 
     return (
@@ -163,12 +143,14 @@ const Home = () => {
                         height= '100%'
                     />
                 </VideoContainer>
-                {/* <TmpImageContainer>
-                    <TmpImage src={ProblemImage} />
-                </TmpImageContainer> */}
-                {/* <Video /> */}
+                <h4>คุณคือ ผู้ใช้บริการ หรือ ผู้ให้บริการซัก-อบ-รีด</h4>
+                <br/>
+                <ButtonContainer>
+                    <Button onClick={() => SelectRoleHandler(1)}>ผู้ใช้บริการ</Button>
+                    <Button onClick={() => SelectRoleHandler(2)}>ผู้ให้บริการ</Button>
+                </ButtonContainer>
             </Content1>
-            <Content2>
+            {/* <Content2>
                 <MobileImg src={MOBILE_IMAGE}></MobileImg>
                 <TextBox2>
                     <h2>Easy Wash</h2>
@@ -178,18 +160,11 @@ const Home = () => {
                        <br/>สามารถซักผ้าได้ เพียงแค่ใช้ Easy Wash</p>
                 </TextBox2>
                
-            </Content2>
-            <Content3>
-                <h3>กรอกข้อมูลเพื่อร่วมพัฒนาแอปพลิเคชัน
-                <br />และลุ้นรับสิทธิประโยชน์มากมาย</h3>
-                <h4>คุณคือ ผู้ใช้บริการ หรือ ผู้ให้บริการซัก-อบ-รีด</h4>
-                <br/>
-                <ButtonContainer>
-                    <Button onClick={() => SelectRoleHandler(1)}>ผู้ใช้บริการ</Button>
-                    <Button onClick={() => SelectRoleHandler(2)}>ผู้ให้บริการ</Button>
-                </ButtonContainer>
-                {renderForm()}
-            </Content3>
+            </Content2> */}
+            {/* <Content3> */}
+                
+            {/* </Content3> */}
+            {renderForm()}
             <Footer />
         </HomeContainer>
     );

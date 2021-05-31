@@ -4,7 +4,7 @@ import '../../index.css';
 
 const Form = styled.form`
     width: 75%;
-    background-color: white;
+    background-color: #F5F5F5;
     margin-left: auto;
     margin-right: auto;
     border-radius: 1rem;
@@ -45,11 +45,6 @@ const FormContainer = styled.div`
 const CheckBoxList = styled.div`
     width: 75%;
     margin-top: 1rem;
-
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* align-items: flex-start; */
-    /* justify-content: flex-start; */
 `;
 
 const CheckBox = styled.input`
@@ -107,11 +102,14 @@ const UserForm = () => {
                 <label>3.อาชีพ</label>
                 <input className='normal-input' state-value='job' />
                 <br />
-                <label>4.อาศัยอยู่แถวไหน</label>
+                <label>4.รายได้ต่อเดือนโดยประมาณ</label>
+                <input className='normal-input' />
+                <br />
+                <label>5.อาศัยอยู่แถวไหน</label>
                 <br />
                 <input className='normal-input' state-value='location' />
                 <br />
-                <label>5.ลักษณะที่พัก</label>
+                <label>6.ลักษณะที่พัก</label>
                 <br />
                 <CheckBoxList>
                     <div className='col1'>
@@ -133,7 +131,7 @@ const UserForm = () => {
                     </div>
                 </CheckBoxList>
                 <br/>
-                <label>6.ปกติซักผ้าด้วยวิธีไหน(สามารถตอบได้มากกว่า 1 ข้อ)</label>
+                <label>7.ปกติซักผ้าด้วยวิธีไหน(สามารถตอบได้มากกว่า 1 ข้อ)</label>
                 <br />
                 <CheckBoxList>
                         <CheckBoxContainer>
@@ -163,15 +161,15 @@ const UserForm = () => {
                 <br />
                 <input className='normal-input' state-value='reason' />
                 <br />
-                <label>7. ความถี่ในการซักผ้า ต่อเดือน </label>
+                <label>8. ความถี่ในการซักผ้า ต่อเดือน </label>
                 <br />
                 <input className='normal-input' state-value='frequency' />
                 <br />
-                <label>8. ปัญหาที่พบในการซักผ้า ณ ปัจจุบัน </label>
+                <label>9. ปัญหาที่พบในการซักผ้า ณ ปัจจุบัน </label>
                 <br />
                 <input className='normal-input' state-value='problem' />
                 <br />
-                <label>9. ในการซักผ้า 1 ครั้ง มีค่าใช้จ่ายประมาณเท่าไหร่</label>
+                <label>10. ในการซักผ้า 1 ครั้ง มีค่าใช้จ่ายประมาณเท่าไหร่</label>
                 <br />
                 <CheckBoxList>
                     <div className='col1'>
@@ -196,10 +194,14 @@ const UserForm = () => {
                     </div>
                 </CheckBoxList>
                 <br />
-                <label>10. ถ้าอยากซักผ้าให้ง่ายขึ้น อยากให้มีบริการอะไรมาช่วย</label>
+                <label>11. ถ้าอยากซักผ้าให้ง่ายขึ้น อยากให้มีบริการอะไรมาช่วย</label>
                 <input className='normal-input' />
                 <br />
-                <label>11.ถ้ามีบริการซักผ้าแบบ Delivery โดยสามารถเลือกร้าน และเลือกเวลารับ-ส่ง
+                <label>12. คุณคิดว่าการซัก-รีด ในปัจจุบันของคุณ สามารถปรับปรุงให้ดีขึ้นอย่างไรได้อีก</label>
+                <br />
+                <input className='normal-input' />
+                <br />
+                <label>13.ถ้ามีบริการซักผ้าแบบ Delivery โดยสามารถเลือกร้าน และเลือกเวลารับ-ส่ง
 ตามที่คุณสะดวก คุณจะใช้บริการนี้หรือไม่</label>
                 <CheckBoxList>
                     <CheckBoxContainer>
@@ -209,6 +211,10 @@ const UserForm = () => {
                         <CheckBox type='checkbox' state-value='ซักผ่านตู้ Locker' /><span>ไม่ใช้</span>
                     </CheckBoxContainer>
                 </CheckBoxList>
+                <label>14. หากคุณพร้อมที่จะร่วมพัฒนา Application ให้ดีขึ้นไปกับเรา สามารถกรอก
+เบอร์โทรศัพท์เพื่อลุ้นรับสิทธิประโยชน์ต่างๆ มากมาย</label>
+                <br />
+                <input className='normal-input' />
                 <ButtonContainer>
                     <Button type='submit'>Register</Button>
                 </ButtonContainer>
