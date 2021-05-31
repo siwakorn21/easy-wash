@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import '../../index.css';
 
@@ -66,32 +66,57 @@ const Button = styled.button`
 `;
 
 const StoreForm = () => {
+    const [formState, setFormState] = useState({
+        name: '',
+        order_size: -1,
+        location: '',
+        market_group: '',
+        pricing_method: '',
+    });
+
+    const intList = ['order_size'];
+
+    const setInputFormState = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const key = e.target.getAttribute('state-value') || '';
+        const val = e.target.value;
+        if (intList.includes(key)) {
+            const newValue = parseInt(val);
+            setFormState({...formState, [`${key}`]: newValue});
+        } else {
+            setFormState({...formState, [`${key}`]: val});
+        }
+        console.log(formState);
+    } 
+
+    const submitForm = () => {
+        console.log(formState);
+    }
 
     return (
         <Form>
             <FormContainer>
                 <label>1.ชื่อร้าน <span>(อาจใช้ชื่อสมมติได้ กรณีไม่อยากเปิดเผย)</span></label>
                 <br />
-                <input state-value='store-name' />
+                <input state-value='name' onChange={(e) => setInputFormState(e)}/>
                 <br />
                 <label>2.ขนาดของร้าน สามารถรับลูกค้าได้กี่ order ต่อวัน</label>
                 <br />
-                <input state-value='order-size' />
+                <input state-value='order_size' onChange={setInputFormState} />
                 <br />
                 <label>3.Location ของร้าน</label>
                 <br />
-                <input state-value='location' />
+                <input state-value='location' onChange={setInputFormState} />
                 <br />
                 <label>4.กลุ่มลูกค้าของร้านคือใคร</label>
                 <br />
-                <input state-value='market-group' />
+                <input state-value='market_group' onChange={setInputFormState} />
                 <br />
                 <label>5.ร้านมีวิธีคิดราคายังไง <span>(เช่นเหมารายเดือน, ราคาชิ้น, ชั่งกิโล)</span></label>
                 <br />
-                <input state-value='price-cal-method' />
+                <input state-value='pricing_method' onChange={setInputFormState} />
             </FormContainer>
             <ButtonContainer>
-                <Button type='submit'>Register</Button>
+                <Button type='submit' onClick={submitForm}>Register</Button>
             </ButtonContainer>
         </Form>
     )

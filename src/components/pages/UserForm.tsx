@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import '../../index.css';
 
@@ -91,132 +91,203 @@ const Button = styled.button`
 
 const UserForm = () => {
 
+    const [formState, setFormState] = useState({
+        email: '',
+        age: -1,
+        job: '',
+        income: -1,
+        location: '',
+        building_type: '',
+        wash_method: '',
+        reason_wash: '',
+        freq_wash_per_month: -1,
+        problem: '',
+        cost: -1,
+        method_help_washing: '',
+        method_improve_washing: '',
+        need_delivery_service: false,
+        phone: ''
+    });
+
+    const [needDev, setNeedDev] = useState({'ใช่': false, 'ไม่ใช่': false});
+    const [washMethod, setWashMethod] = useState<string[]>([]);
+    const [another, setAnother] = useState('');
+
+    const [buildingType, setBuildingType] = useState({
+        'บ้าน': false,
+        'หอพัก': false,
+        'คอนโด': false,
+        'Hostel': false,
+        'โรงแรม': false,
+    });
+
+    const intList = ['age', 'income', 'cost', 'freq_wash_per_month'];
+
+    const chageValueType = (key: any, value: string) => {
+        if (intList.includes(key) && key !== null) {
+            return parseInt(value);
+        } else {
+            return value;
+        }
+    }
+
+    const setInputFormState = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const key = e.target.getAttribute('state-value');
+        const value = chageValueType(key, e.target.value);
+        const newState = {...formState, [`${key}`]: value};
+        setFormState(newState);
+        console.log(newState);
+    }
+
+    const setNeedDevService = (val: boolean) => {
+        if (val === true) {
+            const newState = {'ใช่': true, 'ไม่ใช่': false};
+            setFormState({...formState, ['need_delivery_service']: true});
+            setNeedDev(newState);
+        } else {
+            const newState = {'ใช่': false, 'ไม่ใช่': true};
+            setFormState({...formState, ['need_delivery_service']: false});
+            setNeedDev(newState);
+        }
+        console.log(formState)
+    }
+
+    const setBuildingState = (val: string) => {
+        let newState = {
+            'บ้าน': false,
+            'หอพัก': false,
+            'คอนโด': false,
+            'Hostel': false,
+            'โรงแรม': false,
+        };
+        setBuildingType({...newState, [val]: true});
+        setFormState({...formState, ['building_type']: val});
+        console.log(formState);
+    }
+
+    const setWashMethodState = (val: string) => {
+        if (washMethod.includes(val)) {
+            const newState = washMethod.filter(item => item !== val);
+            setWashMethod(newState);
+        } else {
+            const newState = [...washMethod, val];
+            setWashMethod(newState)
+        }
+        console.log(washMethod);
+    }
+
+    const submitForm = () => {
+        if (another !== '' || another !== null) {
+            setWashMethod([...washMethod, another]);
+        }
+        console.log(formState);
+    }
+
     return (
         <Form>
             <FormContainer>
                 <label>1.Email: </label>
-                <input className='normal-input' type='email' state-value='email' />
+                <input className='normal-input' type='email' state-value='email' onChange={setInputFormState}/>
                 <br />
                 <label>2.อายุ: </label>
-                <input className='normal-input' state-value='age' />
+                <input className='normal-input' state-value='age' onChange={setInputFormState}/>
                 <label>3.อาชีพ</label>
-                <input className='normal-input' state-value='job' />
+                <input className='normal-input' state-value='job' onChange={setInputFormState}/>
                 <br />
                 <label>4.รายได้ต่อเดือนโดยประมาณ</label>
-                <input className='normal-input' />
+                <input className='normal-input' state-value='income' onChange={setInputFormState}/>
                 <br />
                 <label>5.อาศัยอยู่แถวไหน</label>
                 <br />
-                <input className='normal-input' state-value='location' />
+                <input className='normal-input' state-value='location' onChange={setInputFormState} />
                 <br />
                 <label>6.ลักษณะที่พัก</label>
                 <br />
                 <CheckBoxList>
-                    <div className='col1'>
-                        <CheckBoxContainer>
-                            <CheckBox type='checkbox'/><span>บ้าน</span>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <CheckBox type='checkbox'/><span>หอพัก</span>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <CheckBox type='checkbox'/><span>Hostel</span>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <CheckBox type='checkbox'/><span>คอนโด</span>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <CheckBox type='checkbox'/><span>โรงแรม</span>
-                        </CheckBoxContainer>
-                    </div>
+                    {/* <div className='col1'> */}
+                    <CheckBoxContainer>
+                        <CheckBox type='checkbox' checked={buildingType['บ้าน']} onClick={() => setBuildingState('บ้าน')}/><span>บ้าน</span>
+                    </CheckBoxContainer>
+                    <CheckBoxContainer>
+                        <CheckBox type='checkbox' checked={buildingType['หอพัก']} onClick={() => setBuildingState('หอพัก')} /><span>หอพัก</span>
+                    </CheckBoxContainer>
+                    <CheckBoxContainer>
+                        <CheckBox type='checkbox' checked={buildingType['Hostel']} onClick={() => setBuildingState('Hostel')} /><span>Hostel</span>
+                    </CheckBoxContainer>
+                    <CheckBoxContainer>
+                        <CheckBox type='checkbox' checked={buildingType['คอนโด']} onClick={() => setBuildingState('คอนโด')} /><span>คอนโด</span>
+                    </CheckBoxContainer>
+                    <CheckBoxContainer>
+                        <CheckBox type='checkbox' checked={buildingType['โรงแรม']} onClick={() => setBuildingState('โรงแรม')} /><span>โรงแรม</span>
+                    </CheckBoxContainer>
+                    {/* </div> */}
                 </CheckBoxList>
                 <br/>
                 <label>7.ปกติซักผ้าด้วยวิธีไหน(สามารถตอบได้มากกว่า 1 ข้อ)</label>
                 <br />
                 <CheckBoxList>
                         <CheckBoxContainer>
-                            <CheckBox type='checkbox'/><span>ซักมือด้วยตนเอง</span>
+                            <CheckBox type='checkbox' onClick={() => setWashMethodState('ซักมือด้วยตนเอง')}/><span>ซักมือด้วยตนเอง</span>
                         </CheckBoxContainer>
                         <CheckBoxContainer>
-                            <CheckBox type='checkbox'/><span>เครื่องซักผ้าของตนเอง</span>
+                            <CheckBox type='checkbox' onClick={() => setWashMethodState('เครื่องศักผ้าตนเอง')} /><span>เครื่องซักผ้าของตนเอง</span>
                         </CheckBoxContainer>
                         <CheckBoxContainer>
-                            <CheckBox type='checkbox' state-value='เครื่องซักผ้าหยอดเหรียญ'/><span>เครื่องซักผ้าหยอดเหรียญ</span>
+                            <CheckBox type='checkbox' onClick={() => setWashMethodState('เครื่องซักผ้าหยอดเหรียญ')} /><span>เครื่องซักผ้าหยอดเหรียญ</span>
                         </CheckBoxContainer>
                         <CheckBoxContainer>
-                            <CheckBox type='checkbox' state-value='ร้านตู้ซักผ้า Franchise'/><span>ร้านตู้ซักผ้า Franchise</span>
+                            <CheckBox type='checkbox' onClick={() => setWashMethodState('ร้านตู้ซักผ้า Franchise')} /><span>ร้านตู้ซักผ้า Franchise</span>
                         </CheckBoxContainer>
                         <CheckBoxContainer>
-                            <CheckBox type='checkbox' state-value='ส่งร้าน ซัก-อบ-รีด' /><span>ส่งร้าน ซัก-อบ-รีด</span>
+                            <CheckBox type='checkbox' onClick={() => setWashMethodState('ส่งร้าน ซัก-อบ-รีด')} /><span>ส่งร้าน ซัก-อบ-รีด</span>
                         </CheckBoxContainer>
                         <CheckBoxContainer>
-                            <CheckBox type='checkbox' state-value='ซักผ่านตู้ Locker' /><span>ซักผ่านตู้ Locker</span>
+                            <CheckBox type='checkbox' onClick={() => setWashMethodState('ซักผ่านตู้ Locker')} /><span>ซักผ่านตู้ Locker</span>
                         </CheckBoxContainer>
                         <CheckBoxContainer>
-                            <CheckBox type='checkbox' state-value=''/><span>อื่นๆ</span>
+                            <CheckBox type='checkbox' /><span>อื่นๆ</span><input onChange={(e) => setAnother(e.target.value)} style={{backgroundColor: 'transparent', borderBottom: '1px solid black', marginLeft: '1rem', fontSize:'1.2rem', padding: '0.2rem'}} />
                         </CheckBoxContainer>
                 </CheckBoxList>
                 <br />
                 <label>เหตุผลที่เลือกใช้วิธีดังกล่าว</label>
                 <br />
-                <input className='normal-input' state-value='reason' />
+                <input className='normal-input' state-value='reason-wash' onChange={setInputFormState} />
                 <br />
                 <label>8. ความถี่ในการซักผ้า ต่อเดือน </label>
                 <br />
-                <input className='normal-input' state-value='frequency' />
+                <input className='normal-input' state-value='freq_wash_per_month' onChange={setInputFormState} />
                 <br />
                 <label>9. ปัญหาที่พบในการซักผ้า ณ ปัจจุบัน </label>
                 <br />
-                <input className='normal-input' state-value='problem' />
+                <input className='normal-input' state-value='problem' onChange={setInputFormState} />
                 <br />
                 <label>10. ในการซักผ้า 1 ครั้ง มีค่าใช้จ่ายประมาณเท่าไหร่</label>
                 <br />
-                <CheckBoxList>
-                    <div className='col1'>
-                        <CheckBoxContainer>
-                            <CheckBox type='checkbox'/><span>0-50 บ.</span>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <CheckBox type='checkbox'/><span>51-100 บ.</span>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <CheckBox type='checkbox' state-value='เครื่องซักผ้าหยอดเหรียญ'/><span>101-200 บ.</span>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <CheckBox type='checkbox' state-value='ร้านตู้ซักผ้า Franchise'/><span>201-500 บ.</span>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <CheckBox type='checkbox' state-value='ส่งร้าน ซัก-อบ-รีด' /><span>501-1000 บ.</span>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <CheckBox type='checkbox' state-value='ซักผ่านตู้ Locker' /><span>มากกว่า 1000 บ.</span>
-                        </CheckBoxContainer>
-                    </div>
-                </CheckBoxList>
+                <input className='normal-input' state-value='cost' onChange={setInputFormState} />
                 <br />
                 <label>11. ถ้าอยากซักผ้าให้ง่ายขึ้น อยากให้มีบริการอะไรมาช่วย</label>
-                <input className='normal-input' />
+                <input className='normal-input' state-value='method_help_washing' onChange={setInputFormState} />
                 <br />
                 <label>12. คุณคิดว่าการซัก-รีด ในปัจจุบันของคุณ สามารถปรับปรุงให้ดีขึ้นอย่างไรได้อีก</label>
                 <br />
-                <input className='normal-input' />
+                <input className='normal-input' state-value='method_improve_washing' onChange={setInputFormState} />
                 <br />
                 <label>13.ถ้ามีบริการซักผ้าแบบ Delivery โดยสามารถเลือกร้าน และเลือกเวลารับ-ส่ง
 ตามที่คุณสะดวก คุณจะใช้บริการนี้หรือไม่</label>
                 <CheckBoxList>
                     <CheckBoxContainer>
-                        <CheckBox type='checkbox' state-value='ซักผ่านตู้ Locker' /><span>ใช้</span>
+                        <CheckBox type='checkbox' state-value='ซักผ่านตู้ Locker' checked={needDev['ใช่']} onClick={() => setNeedDevService(true)} /><span>ใช้</span>
                     </CheckBoxContainer>
                     <CheckBoxContainer>
-                        <CheckBox type='checkbox' state-value='ซักผ่านตู้ Locker' /><span>ไม่ใช้</span>
+                        <CheckBox type='checkbox' state-value='ซักผ่านตู้ Locker' checked={needDev['ไม่ใช่']} onClick={() => setNeedDevService(false)} /><span>ไม่ใช้</span>
                     </CheckBoxContainer>
                 </CheckBoxList>
                 <label>14. หากคุณพร้อมที่จะร่วมพัฒนา Application ให้ดีขึ้นไปกับเรา สามารถกรอก
 เบอร์โทรศัพท์เพื่อลุ้นรับสิทธิประโยชน์ต่างๆ มากมาย</label>
                 <br />
-                <input className='normal-input' />
+                <input className='normal-input' state-value='phone' onChange={setInputFormState} />
                 <ButtonContainer>
-                    <Button type='submit'>Register</Button>
+                    <Button onClick={submitForm} type='submit'>Register</Button>
                 </ButtonContainer>
             </FormContainer>
         </Form>

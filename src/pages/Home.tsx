@@ -42,7 +42,7 @@ const MobileImg = styled.img`
 
 const Content3 = styled.div`
     margin-top: 10rem;
-    z-index: -2;
+    z-index: 1;
     background-color: white;
     width: 100%;
     position: relative;
