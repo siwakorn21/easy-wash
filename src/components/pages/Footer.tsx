@@ -9,14 +9,14 @@ const FooterContainer = styled.div`
 `;
 
 const Logo = styled.img`
-    width: 60%;
+    width: 30%;
 `;
 
 const LogoContainer = styled.div`
     width: 20%;
     height: 30%;
     margin-right: auto;
-    margin-left: 2rem;
+    margin-left: 5rem;
 `;
 
 const ContactContainer = styled.div`
