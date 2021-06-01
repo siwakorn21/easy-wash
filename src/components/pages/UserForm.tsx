@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import '../../index.css';
 
@@ -98,7 +99,7 @@ const UserForm = () => {
         income: -1,
         location: '',
         building_type: '',
-        wash_method: '',
+        wash_method: [],
         reason_wash: '',
         freq_wash_per_month: -1,
         problem: '',
@@ -173,14 +174,31 @@ const UserForm = () => {
             const newState = [...washMethod, val];
             setWashMethod(newState)
         }
-        console.log(washMethod);
+        setFormState({...formState, [`${'wash_method'}`]: washMethod})
+        console.log(formState['wash_method']);
     }
 
     const submitForm = () => {
         if (another !== '' || another !== null) {
             setWashMethod([...washMethod, another]);
+            setFormState({...formState, [`${'wash_method'}`]: washMethod})
+        }
+
+        let newWashMethod: [{[method: string]: string}];
+
+        for (var i = 0; i < formState['wash_method'].length; i++) {
+            // newWashMethod.push_back(
         }
         console.log(formState);
+        axios
+            .post("http://172.17.198.101:8080/user/form", formState)
+            .then(response => {
+                console.log("response: ", response)
+                // do something about response
+            })
+            .catch(err => {
+                console.error(err)
+            })
     }
 
     return (
@@ -251,7 +269,7 @@ const UserForm = () => {
                 <br />
                 <label>เหตุผลที่เลือกใช้วิธีดังกล่าว</label>
                 <br />
-                <input className='normal-input' state-value='reason-wash' onChange={setInputFormState} />
+                <input className='normal-input' state-value='reason_wash' onChange={setInputFormState} />
                 <br />
                 <label>8. ความถี่ในการซักผ้า ต่อเดือน </label>
                 <br />
