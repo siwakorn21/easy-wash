@@ -9,6 +9,7 @@ import Footer from '../components/pages/Footer';
 import RegisterForm from '../components/pages/RegisterForm';
 import StoreForm from '../components/pages/StoreForm';
 import UserForm from '../components/pages/UserForm';
+import VIDEO from '../assets/videos/Final.mp4';
 
 const HomeContainer = styled.div`
     /* font-family: 'Prompt', sans-serif; */
@@ -25,12 +26,21 @@ const Content1 = styled.div`
         font-size: 1.5rem;
         text-align: center;
     }
+
+    /* @media only screen and (max-width: 600px) {
+        padding-bottom: 5rem;
+    } */
 `;
 
 const Header1 = styled.h1`
     margin-top: 5rem;
     font-size: 2.5rem;
     text-align: center;
+    font-weight: bolder;
+
+    @media only screen and (max-width: 600px) {
+        font-size: 1.7rem;
+    }
 `;
 
 const MobileImg = styled.img`
@@ -38,6 +48,10 @@ const MobileImg = styled.img`
     top: -0%;
     width: 60%;
     z-index: -1;
+
+    @media only screen and (max-width: 600px) {
+        display: none;
+    }
 `;
 
 const Content3 = styled.div`
@@ -65,6 +79,13 @@ const Content3 = styled.div`
         margin-top: 2rem;
     }
 
+    @media only screen and (max-width: 600px) {
+        h3 {
+            font-size: 1.3rem;
+            margin-left: 0;
+            text-align: center;
+        }
+    }
 `;
 
 const Button = styled.button`
@@ -88,6 +109,7 @@ const ButtonContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
 `;
 
 const VideoContainer = styled.div`
@@ -96,6 +118,11 @@ const VideoContainer = styled.div`
     margin-top: 7rem;
     margin-left: auto;
     margin-right: auto;
+
+    @media only screen and (max-width: 600px) {
+        width: 100%;
+        /* height: 60vh; */
+    }
 `;
 
 const Home = () => {
@@ -137,11 +164,13 @@ const Home = () => {
                     ทำไมเรายังต้องทน<br/>กับปัญหาต่างๆ เหล่านี้?
                 </Header1>
                 <VideoContainer>
-                    <ReactPlayer 
-                        url="https://www.youtube.com/watch?v=1MRA8sHmJWA"
+                    {/* <ReactPlayer 
+                        // url="https://www.youtube.com/watch?v=1MRA8sHmJWA"
+                        url={VIDEO}
                         width= '100%'
                         height= '100%'
-                    />
+                    /> */}
+                    <video src={VIDEO} autoPlay={true} muted controls width='100%'></video>
                 </VideoContainer>
                 <h4>คุณคือ ผู้ใช้บริการ หรือ ผู้ให้บริการซัก-อบ-รีด</h4>
                 <br/>

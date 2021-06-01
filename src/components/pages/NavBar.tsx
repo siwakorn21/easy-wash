@@ -4,7 +4,7 @@ import LogoImage from '../../assets/images/logo-1.png';
 
 const NavBarContainer = styled.div`
     background-color: white;
-    height: 100px;
+    height: 10vh;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -16,10 +16,19 @@ const LogoContainer = styled.div`
     margin-right: auto;
     margin-left: 6rem;
     width: 20%;
+
+    @media only screen and (max-width: 600px) {
+        width: 30%;
+        margin-left: 2rem;
+    }
 `;
 
 const Logo = styled.img`
     width: 50%;
+
+    @media only screen and (max-width: 600px) {
+        width: 100%;
+    }
 `;
 
 
@@ -34,6 +43,14 @@ const NavBarMenuItem = styled.a`
     &:last-child {
         margin-right: 0;
     }
+
+    @media only screen and (max-width: 600px) {
+        display: none;
+    }
+`;
+
+const NavBarMenuMobile = styled.div`
+
 `;
 
 const NavBar = () => {
@@ -47,6 +64,9 @@ const NavBar = () => {
                 <NavBarMenuItem href='#'>Register</NavBarMenuItem>
                 <NavBarMenuItem href='#'>Contact us</NavBarMenuItem>
             </NavBarMenu>
+            <NavBarMenuMobile>
+
+            </NavBarMenuMobile>
         </NavBarContainer>
     );
 }

@@ -18,12 +18,6 @@ function App() {
           <Route path='/'>
             <Home />
           </Route>
-          <Route path='/user'>
-            <UserForm />
-          </Route> 
-          <Route path='/store'>
-            <StoreForm />
-          </Route>
         </Switch>
       </Router>
     </div>

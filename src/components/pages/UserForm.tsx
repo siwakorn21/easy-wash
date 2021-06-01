@@ -39,12 +39,25 @@ const FormContainer = styled.div`
 
     input.normal-input {
         width: 100%;
+        padding: 0.5rem;
+        font-size: 1.2rem;
         margin-left: auto;
         margin-right: auto;
         margin-top: 1rem;
         height: 4vh;
         border: 1px solid #2F2F2F;
         border-radius: 0.2rem;
+    }
+
+    @media only screen and (max-width: 600px) {
+        input.normal-input {
+            height: 6vh;
+        }
+
+        label {
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
     }
 `;
 
@@ -176,22 +189,17 @@ const UserForm = () => {
         let newState: string[] = [];
         if (washMethod.includes(val)) {
             newState = washMethod.filter(item => item !== val);
-            // setWashMethod(newState);
         } else {
             newState = [...washMethod, val];
-            // setWashMethod(newState)
         }
         setFormState({...formState, [`${'wash_method'}`]: newState})
         setWashMethod(newState);
-        // console.log(formState['wash_method']);
     }
 
     const submitForm = (e: React.MouseEvent<HTMLButtonElement>) => {
         // e.preventDefault();
         let sendData = formState;
         if (another !== '' || another !== null) {
-            // setWashMethod([...washMethod, another]);
-            // setFormState({...formState, [`${'wash_method'}`]: washMethod})
             sendData = {...sendData, [`${'wash_method'}`]: [...washMethod, another]};
         }
 
@@ -224,7 +232,7 @@ const UserForm = () => {
                 <label>3.อาชีพ</label>
                 <input className='normal-input' state-value='job' onChange={setInputFormState}/>
                 <br />
-                <label>4.รายได้ต่อเดือนโดยประมาณ</label>
+                <label>4.รายได้ต่อเดือนโดยประมาณ (กรุณาตอบเป็นตัวเลข)</label>
                 <input className='normal-input' state-value='income' onChange={setInputFormState}/>
                 <br />
                 <label>5.อาศัยอยู่แถวไหน</label>
@@ -283,7 +291,7 @@ const UserForm = () => {
                 <br />
                 <input className='normal-input' state-value='reason_wash' onChange={setInputFormState} />
                 <br />
-                <label>8. ความถี่ในการซักผ้า ต่อเดือน </label>
+                <label>8. ความถี่ในการซักผ้า ต่อเดือน (กรุณาตอบเป็นตัวเลข)</label>
                 <br />
                 <input className='normal-input' state-value='freq_wash_per_month' onChange={setInputFormState} />
                 <br />
@@ -291,7 +299,7 @@ const UserForm = () => {
                 <br />
                 <input className='normal-input' state-value='problem' onChange={setInputFormState} />
                 <br />
-                <label>10. ในการซักผ้า 1 ครั้ง มีค่าใช้จ่ายประมาณเท่าไหร่</label>
+                <label>10. ในการซักผ้า 1 ครั้ง มีค่าใช้จ่ายประมาณเท่าไหร่ (กรุณาตอบเป็นตัวเลข)</label>
                 <br />
                 <input className='normal-input' state-value='cost' onChange={setInputFormState} />
                 <br />

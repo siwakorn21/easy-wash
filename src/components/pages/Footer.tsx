@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import LogoImage from '../../assets/images/logo-2.png';
 
 const FooterContainer = styled.div`
+    margin-top: 2rem;
     background-color: #480CA8;
     display: flex;
     align-items: center;
@@ -17,14 +18,24 @@ const LogoContainer = styled.div`
     height: 30%;
     margin-right: auto;
     margin-left: 5rem;
+
+    @media only screen and (max-width: 600px) {
+        width: 45%;
+    }
 `;
 
 const ContactContainer = styled.div`
     margin-right: 6rem;
-     span {
-         color: white;
-         font-size: 1rem;
-     }
+    span {
+        color: white;
+        font-size: 1rem;
+    }
+
+    @media only screen and (max-width: 600px) {
+        span {
+            font-size: 0.35rem;
+        }
+    }
 `;
 
 const Footer = () => {
