@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
+import config from '../../config';
 import '../../index.css';
+
+const url = `http://${config.BACKEND_IP}:${config.BACKEND_PORT}`;
+// const url = 'http://backend:8080';
 
 const Form = styled.form`
     width: 75%;
@@ -85,11 +90,19 @@ const StoreForm = () => {
         } else {
             setFormState({...formState, [`${key}`]: val});
         }
-        console.log(formState);
+        // console.log(formState);
     } 
 
     const submitForm = () => {
-        console.log(formState);
+        axios
+            .post(`${url}/store/form`, formState)
+            .then(response => {
+                console.log("response: ", response);
+            })
+            .catch(err => {
+                console.error(err);
+                window.alert('Something went wrong! Please try again.');
+            });
     }
 
     return (

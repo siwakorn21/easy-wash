@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import config from '../../config';
 import '../../index.css';
+
+// Config Variable
+const url = `http://${config.BACKEND_IP}:${config.BACKEND_PORT}`;
+// const url = `backend:8080`;
 
 const Form = styled.form`
     width: 75%;
@@ -124,6 +129,7 @@ const UserForm = () => {
 
     const intList = ['age', 'income', 'cost', 'freq_wash_per_month'];
 
+
     const chageValueType = (key: any, value: string) => {
         if (intList.includes(key) && key !== null) {
             return parseInt(value);
@@ -137,7 +143,7 @@ const UserForm = () => {
         const value = chageValueType(key, e.target.value);
         const newState = {...formState, [`${key}`]: value};
         setFormState(newState);
-        console.log(newState);
+        // console.log(newState);
     }
 
     const setNeedDevService = (val: boolean) => {
@@ -150,7 +156,7 @@ const UserForm = () => {
             setFormState({...formState, ['need_delivery_service']: false});
             setNeedDev(newState);
         }
-        console.log(formState)
+        // console.log(formState)
     }
 
     const setBuildingState = (val: string) => {
@@ -163,42 +169,48 @@ const UserForm = () => {
         };
         setBuildingType({...newState, [val]: true});
         setFormState({...formState, ['building_type']: val});
-        console.log(formState);
+        // console.log(formState);
     }
 
     const setWashMethodState = (val: string) => {
+        let newState: string[] = [];
         if (washMethod.includes(val)) {
-            const newState = washMethod.filter(item => item !== val);
-            setWashMethod(newState);
+            newState = washMethod.filter(item => item !== val);
+            // setWashMethod(newState);
         } else {
-            const newState = [...washMethod, val];
-            setWashMethod(newState)
+            newState = [...washMethod, val];
+            // setWashMethod(newState)
         }
-        setFormState({...formState, [`${'wash_method'}`]: washMethod})
-        console.log(formState['wash_method']);
+        setFormState({...formState, [`${'wash_method'}`]: newState})
+        setWashMethod(newState);
+        // console.log(formState['wash_method']);
     }
 
-    const submitForm = () => {
+    const submitForm = (e: React.MouseEvent<HTMLButtonElement>) => {
+        // e.preventDefault();
+        let sendData = formState;
         if (another !== '' || another !== null) {
-            setWashMethod([...washMethod, another]);
-            setFormState({...formState, [`${'wash_method'}`]: washMethod})
+            // setWashMethod([...washMethod, another]);
+            // setFormState({...formState, [`${'wash_method'}`]: washMethod})
+            sendData = {...sendData, [`${'wash_method'}`]: [...washMethod, another]};
         }
 
-        let newWashMethod: [{[method: string]: string}];
+        let newWashMethod = [];
 
         for (var i = 0; i < formState['wash_method'].length; i++) {
-            // newWashMethod.push_back(
+            newWashMethod.push({[`${'method'}`] : formState['wash_method'][i]})
         }
-        console.log(formState);
+        sendData = {...formState, [`${'wash_method'}`]: newWashMethod};
+        
         axios
-            .post("http://172.17.198.101:8080/user/form", formState)
+            .post(`${url}/user/form`, sendData)
             .then(response => {
-                console.log("response: ", response)
-                // do something about response
+                console.log("response: ", response);
             })
             .catch(err => {
-                console.error(err)
-            })
+                console.error(err);
+                window.alert('Something went wrong. Please try again.')
+            });
     }
 
     return (
