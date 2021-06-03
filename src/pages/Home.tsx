@@ -9,7 +9,9 @@ import Footer from '../components/pages/Footer';
 import RegisterForm from '../components/pages/RegisterForm';
 import StoreForm from '../components/pages/StoreForm';
 import UserForm from '../components/pages/UserForm';
-import VIDEO from '../assets/videos/Final.mp4';
+// import VIDEO from '../assets/videos/Final.mp4';
+
+const VIDEO = 'https://sakdee-storage.s3-ap-southeast-1.amazonaws.com/videos/Final.mp4';
 
 const HomeContainer = styled.div`
     /* font-family: 'Prompt', sans-serif; */
