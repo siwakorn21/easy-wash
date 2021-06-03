@@ -156,6 +156,7 @@ const UserForm = () => {
         const value = chageValueType(key, e.target.value);
         const newState = {...formState, [`${key}`]: value};
         setFormState(newState);
+        // validateInput(e.target.value, key);
         // console.log(newState);
     }
 
@@ -221,6 +222,18 @@ const UserForm = () => {
             });
     }
 
+    const validateInput = (input: string, type: string | null) => {
+        if (type === null) return;
+        // if (intList.includes(type)) {
+        //     console.log('asdasd')
+        //     console.log(parseInt(input));
+        //     if (Number.isNaN(parseInt(input))) {
+        //         window.alert('กรุณาตอบเป็นตัวเลข');
+        //         setFormState({...formState, [type]: -1});
+        //     }
+        // }
+    }
+
     return (
         <Form>
             <FormContainer>
@@ -228,12 +241,12 @@ const UserForm = () => {
                 <input className='normal-input' type='email' state-value='email' onChange={setInputFormState}/>
                 <br />
                 <label>2.อายุ: </label>
-                <input className='normal-input' state-value='age' onChange={setInputFormState}/>
+                <input className='normal-input' state-value='age' onChange={setInputFormState} />
                 <label>3.อาชีพ</label>
                 <input className='normal-input' state-value='job' onChange={setInputFormState}/>
                 <br />
                 <label>4.รายได้ต่อเดือนโดยประมาณ (กรุณาตอบเป็นตัวเลข)</label>
-                <input className='normal-input' state-value='income' onChange={setInputFormState}/>
+                <input className='normal-input' state-value='income' onChange={setInputFormState} />
                 <br />
                 <label>5.อาศัยอยู่แถวไหน</label>
                 <br />
