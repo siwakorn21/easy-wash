@@ -198,7 +198,7 @@ const UserForm = () => {
     }
 
     const submitForm = (e: React.MouseEvent<HTMLButtonElement>) => {
-        // e.preventDefault();
+        e.preventDefault();
         let sendData = formState;
         if (another !== '' || another !== null) {
             sendData = {...sendData, [`${'wash_method'}`]: [...washMethod, another]};
@@ -215,10 +215,13 @@ const UserForm = () => {
             .post(`${url}/user/form`, sendData)
             .then(response => {
                 console.log("response: ", response);
+                window.alert('Submit form success. Thank you for taking the time.')
+                window.location.reload();
             })
             .catch(err => {
                 console.error(err);
                 window.alert('Something went wrong. Please try again.')
+                window.location.reload();
             });
     }
 

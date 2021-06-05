@@ -93,15 +93,19 @@ const StoreForm = () => {
         // console.log(formState);
     } 
 
-    const submitForm = () => {
+    const submitForm = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         axios
             .post(`${url}/store/form`, formState)
             .then(response => {
                 console.log("response: ", response);
+                window.alert('Submit form success. Thank you for taking the time.')
+                window.location.reload();
             })
             .catch(err => {
                 console.error(err);
                 window.alert('Something went wrong! Please try again.');
+                window.location.reload();
             });
     }
 
